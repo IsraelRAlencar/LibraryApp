@@ -24,9 +24,9 @@ namespace LibraryService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BookDto>>> GetAllBooks()
+        public async Task<ActionResult<List<BookDto>>> GetAllBooks(string date)
         {
-            return await _repo.GetBooksAsync();
+            return await _repo.GetBooksAsync(date);
         }
 
         [HttpGet("{id}")]

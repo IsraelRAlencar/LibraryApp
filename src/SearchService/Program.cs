@@ -2,16 +2,19 @@ using Polly;
 using Polly.Extensions.Http;
 using MassTransit;
 using System.Net;
+using SearchService.Data;
+using SearchService.Services;
+using SearchService.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-// builder.Services.AddHttpClient<LibrarySvcHttpClient>().AddPolicyHandler(GetPolicy());
+builder.Services.AddHttpClient<LibrarySvcHttpClient>().AddPolicyHandler(GetPolicy());
 builder.Services.AddMassTransit(x =>
 {
-    // x.AddConsumersFromNamespaceContaining<BookCreatedConsumer>();
+    x.AddConsumersFromNamespaceContaining<BookCreatedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("search-service", false));
 
     x.UsingRabbitMq((context, cfg) => {
@@ -29,17 +32,17 @@ var app = builder.Build();
 app.UseAuthorization();
 app.MapControllers();
 
-// app.Lifetime.ApplicationStarted.Register(async () => 
-// {
-//     await Policy.Handle<TimeoutException>()
-//         .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(5))
-//         .ExecuteAndCaptureAsync(async () => await DbInitializer.InitDb(app));
-// });
+app.Lifetime.ApplicationStarted.Register(async () => 
+{
+    await Policy.Handle<TimeoutException>()
+        .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(5))
+        .ExecuteAndCaptureAsync(async () => await DbInitializer.InitDb(app));
+});
 
 app.Run();
 
-// static IAsyncPolicy<HttpResponseMessage> GetPolicy()
-//     => HttpPolicyExtensions
-//         .HandleTransientHttpError()
-//         .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
-//         .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));
+static IAsyncPolicy<HttpResponseMessage> GetPolicy()
+    => HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
+        .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));

@@ -34,7 +34,7 @@ public class BookRepository : IBookRepository
         return await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
     }
 
-    public async Task<List<BookDto>> GetBooksAsync()
+    public async Task<List<BookDto>> GetBooksAsync(string date)
     {
         return await _context.Books.ProjectTo<BookDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
