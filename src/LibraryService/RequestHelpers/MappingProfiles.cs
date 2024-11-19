@@ -1,4 +1,5 @@
 using AutoMapper;
+using Contracts;
 using LibraryService.DTOs.BookDTOs;
 using LibraryService.DTOs.CategoryDTOs;
 using LibraryService.DTOs.ImageDTOs;
@@ -22,6 +23,9 @@ public class MappingProfiles : Profile
         CreateMap<CreateBookDto, Book>()
             .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
             .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images));
+        CreateMap<BookDto, BookCreated>()
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images.Select(i => i.ImageUrl).ToList()))
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories.Select(c => c.Name).ToList()));
 
         // Category Mappings
         CreateMap<Category, CategoryDto>()

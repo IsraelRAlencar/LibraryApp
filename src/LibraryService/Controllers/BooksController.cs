@@ -1,4 +1,5 @@
 using AutoMapper;
+using Contracts;
 using LibraryService.Data.Interfaces;
 using LibraryService.DTOs.BookDTOs;
 using LibraryService.Entities;
@@ -47,7 +48,7 @@ namespace LibraryService.Controllers
 
             var newBook = _mapper.Map<BookDto>(book);
 
-            // await _publishEndpoint.Publish(_mapper.Map<BookCreated>(newBook));
+            await _publishEndpoint.Publish(_mapper.Map<BookCreated>(newBook));
 
             var result = await _repo.SaveChangesAsync();
 
@@ -72,7 +73,7 @@ namespace LibraryService.Controllers
             book.Images.AddRange(updateBookDto.Images);
             book.Categories.AddRange(updateBookDto.Categories);
 
-            // await _publishEndpoint.Publish(_mapper.Map<BookUpdated>(book));
+            await _publishEndpoint.Publish(_mapper.Map<BookUpdated>(book));
 
             var result = await _repo.SaveChangesAsync();
 
@@ -90,7 +91,7 @@ namespace LibraryService.Controllers
 
             _repo.RemoveBook(book);
 
-            // await _publishEndpoint.Publish(_mapper.Map<BookDeleted>(book));
+            await _publishEndpoint.Publish(_mapper.Map<BookDeleted>(book));
 
             var result = await _repo.SaveChangesAsync();
 
