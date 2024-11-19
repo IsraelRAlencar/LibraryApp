@@ -29,7 +29,7 @@ public class DbInitializer
         var httpClient = scope.ServiceProvider.GetRequiredService<LibrarySvcHttpClient>();
         var books = await httpClient.GetBooksForSearchDb();
 
-        Console.WriteLine(books.Count + "items fetched from LibraryService.");
+        Console.WriteLine(books.Count + " books fetched from LibraryService.");
         if (books.Count > 0) await DB.SaveAsync(books);
     }
 }

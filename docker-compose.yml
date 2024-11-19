@@ -7,23 +7,15 @@ services:
       - 5432:5432
     volumes:
       - /var/lib/postgresql/data
-  # mongodb:
-  #   image: mongo
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=mongo
-  #     - MONGO_INITDB_ROOT_PASSWORD=mongopw
-  #   ports:
-  #     - 27017:27017
-  #   volumes:
-  #     - /var/lib/mongo/data
-  # typesense:
-  #   image: typesense/typesense:27.0
-  #   restart: on-failure
-  #   ports:
-  #     - 8108:8108
-  #   volumes:
-  #     - ./typesense-data:/data
-  #   command: '--data-dir /data --api-key=xyz --enable-cors'
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongopw
+    ports:
+      - 27017:27017
+    volumes:
+      - /var/lib/mongo/data
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:

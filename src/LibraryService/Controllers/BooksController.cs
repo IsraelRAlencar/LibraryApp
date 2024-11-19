@@ -29,6 +29,12 @@ namespace LibraryService.Controllers
             return await _repo.GetBooksAsync(date);
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<List<BookCreated>>> GetAllBooksSearchDb(string date)
+        {
+            return await _repo.GetBooksAsyncSearchDb(date);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<BookDto>> GetBookById(Guid id)
         {

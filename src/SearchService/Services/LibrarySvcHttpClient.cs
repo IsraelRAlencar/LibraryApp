@@ -21,6 +21,6 @@ public class LibrarySvcHttpClient
             .Project(b => b.UpdatedAt.ToString())
             .ExecuteFirstAsync();
 
-        return await _httpClient.GetFromJsonAsync<List<Book>>($"{_config["LibraryServiceUrl"]}/api/books?lastUpdated={lastUpdated}");
+        return await _httpClient.GetFromJsonAsync<List<Book>>($"{_config["LibraryServiceUrl"]}/library/books/search?lastUpdated={lastUpdated}");
     }
 }

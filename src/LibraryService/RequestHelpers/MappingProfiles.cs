@@ -20,15 +20,25 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images))
             .ForMember(dest => dest.Loans, opt => opt.MapFrom(src => src.Loans))
             .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations));
+        CreateMap<BookDto, Book>()
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images))
+            .ForMember(dest => dest.Loans, opt => opt.MapFrom(src => src.Loans))
+            .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations));
         CreateMap<CreateBookDto, Book>()
             .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
             .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images));
         CreateMap<BookDto, BookCreated>()
             .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images.Select(i => i.ImageUrl).ToList()))
             .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories.Select(c => c.Name).ToList()));
+        CreateMap<Book, BookUpdated>()
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images.Select(i => i.ImageUrl).ToList()))
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories.Select(c => c.Name).ToList()));
 
         // Category Mappings
         CreateMap<Category, CategoryDto>()
+            .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
+        CreateMap<CategoryDto, Category>()
             .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
         CreateMap<CreateCategoryDto, Category>();
 
@@ -53,7 +63,11 @@ public class MappingProfiles : Profile
         CreateMap<CreateLoanDto, Loan>();
 
         // Image mappings
-        CreateMap<Image, ImageDto>();
-        CreateMap<CreateImageDto, Image>();
+        CreateMap<Image, ImageDto>()
+            .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
+        CreateMap<ImageDto, Image>()
+            .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
+        CreateMap<CreateImageDto, Image>()
+            .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
     }
 }

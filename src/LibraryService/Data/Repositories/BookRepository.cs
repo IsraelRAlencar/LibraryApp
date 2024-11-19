@@ -1,5 +1,6 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Contracts;
 using LibraryService.Data.Interfaces;
 using LibraryService.DTOs.BookDTOs;
 using LibraryService.Entities;
@@ -36,7 +37,28 @@ public class BookRepository : IBookRepository
 
     public async Task<List<BookDto>> GetBooksAsync(string date)
     {
-        return await _context.Books.ProjectTo<BookDto>(_mapper.ConfigurationProvider).ToListAsync();
+        var query = _context.Books.OrderBy(x => x.Title).AsQueryable();
+
+        if (!string.IsNullOrEmpty(date))
+        {
+            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+        }
+
+        return await query.ProjectTo<BookDto>(_mapper.ConfigurationProvider).ToListAsync();
+    }
+
+    public async Task<List<BookCreated>> GetBooksAsyncSearchDb(string date)
+    {
+        var query = _context.Books.OrderBy(x => x.Title).AsQueryable();
+
+        if (!string.IsNullOrEmpty(date))
+        {
+            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+        }
+
+        var books = await query.ProjectTo<BookDto>(_mapper.ConfigurationProvider).ToListAsync();
+
+        return _mapper.Map<List<BookCreated>>(books);
     }
 
     public void RemoveBook(Book book)
