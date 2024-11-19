@@ -3,7 +3,6 @@ using LibraryService.Data.Interfaces;
 using LibraryService.DTOs.BookDTOs;
 using LibraryService.Entities;
 using MassTransit;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
