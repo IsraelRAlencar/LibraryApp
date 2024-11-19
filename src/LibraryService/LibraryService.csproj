@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="DTOs\LoanDTOs\" />
+    <Folder Include="DTOs\ReservationDTOs\" />
+    <Folder Include="DTOs\UserDTOs\" />
   </ItemGroup>
 
   <!-- <ItemGroup>
