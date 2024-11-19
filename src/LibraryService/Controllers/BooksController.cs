@@ -66,7 +66,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<BookDto>> UpdateBook(Guid id, UpdateBookDto updateBookDto)
         {
-            var book = await _repo.GetBookByIdAsync(id);
+            var book = await _repo.GetBookEntityByIdAsync(id);
 
             if (book == null) return NotFound();
 
@@ -76,8 +76,12 @@ namespace LibraryService.Controllers
             book.Year = updateBookDto.Year != 0 ? updateBookDto.Year : book.Year;
             book.Pages = updateBookDto.Pages != 0 ? updateBookDto.Pages : book.Pages;
             book.Isbn = updateBookDto.Isbn ?? book.Isbn;
-            book.Images.AddRange(updateBookDto.Images);
-            book.Categories.AddRange(updateBookDto.Categories);
+
+            if (updateBookDto.Images != null)
+                book.Images.AddRange(updateBookDto.Images);
+
+            if (updateBookDto.Categories != null)
+                book.Categories.AddRange(updateBookDto.Categories);
 
             await _publishEndpoint.Publish(_mapper.Map<BookUpdated>(book));
 
@@ -97,7 +101,7 @@ namespace LibraryService.Controllers
 
             _repo.RemoveBook(book);
 
-            await _publishEndpoint.Publish(_mapper.Map<BookDeleted>(book));
+            await _publishEndpoint.Publish(_mapper.Map<BookDeleted>(new BookDeleted { Id = id.ToString() }));
 
             var result = await _repo.SaveChangesAsync();
 
