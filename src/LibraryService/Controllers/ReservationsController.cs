@@ -3,13 +3,12 @@ using LibraryService.Data.Interfaces;
 using LibraryService.DTOs.ReservationDTOs;
 using LibraryService.Entities;
 using MassTransit;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("library/reservations")]
     public class ReservationsController : ControllerBase
     {
         private readonly IReservationRepository _repo;

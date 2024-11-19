@@ -1,6 +1,8 @@
 using LibraryService.Data;
 using Microsoft.EntityFrameworkCore;
 using MassTransit;
+using LibraryService.Data.Interfaces;
+using LibraryService.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,13 @@ builder.Services.AddMassTransit(x =>
         cfg.ConfigureEndpoints(context);
     });
 });
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("library/books")]
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _repo;

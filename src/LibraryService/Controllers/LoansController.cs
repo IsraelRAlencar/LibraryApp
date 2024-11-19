@@ -3,13 +3,12 @@ using LibraryService.Data.Interfaces;
 using LibraryService.DTOs.LoanDTOs;
 using LibraryService.Entities;
 using MassTransit;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("library/loans")]
     public class LoansController : ControllerBase
     {
         private readonly ILoanRepository _repo;

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("library/images")]
     public class ImagesController : ControllerBase
     {
         private readonly IImageRepository _repo;

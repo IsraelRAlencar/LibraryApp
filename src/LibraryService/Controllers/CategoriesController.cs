@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("library/categories")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _repo;
