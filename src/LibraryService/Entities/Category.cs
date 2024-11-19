@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryService.Entities;
 
+[Table("Categories")]
 public class Category
 {
     [Required]

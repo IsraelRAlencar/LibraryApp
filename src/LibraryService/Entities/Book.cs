@@ -15,6 +15,9 @@ public class Book
     public int Pages { get; set; }
     public string Isbn { get; set; }
     public List<Category> Categories { get; set; }
+    public List<Image> Images { get; set; }
+    public List<Loan> Loans { get; set; }
+    public List<Reservation> Reservations { get; set; }
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; }

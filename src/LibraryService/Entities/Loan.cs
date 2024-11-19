@@ -7,11 +7,9 @@ public class Loan
     [Required]
     public Guid Id { get; set; }
     [Required]
-    public Guid BookId { get; set; }
+    public Book Book { get; set; }
     [Required]
-    public Guid UserId { get; set; }
-    [Required]
-    public Guid EmployeeId { get; set; }
+    public User User { get; set; }
     public string Observation { get; set; }
     [Required]
     public DateTime LoanDate { get; set; }

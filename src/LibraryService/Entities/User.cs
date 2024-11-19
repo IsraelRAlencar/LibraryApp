@@ -12,6 +12,8 @@ public class User
     public string Email { get; set; }
     [Required]
     public string Password { get; set; }
+    public List<Loan> Loans { get; set; }
+    public List<Reservation> Reservations { get; set; }
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; }
