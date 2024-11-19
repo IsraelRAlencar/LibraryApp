@@ -1,19 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+using LibraryService.Entities;
 
-namespace LibraryService.Entities;
+namespace LibraryService.DTOs.ReservationDTOs;
 
-public class Reservation
+public class ReservationDto
 {
-    [Required]
     public Guid Id { get; set; }
-    [Required]
     public Book Book { get; set; }
-    [Required]
     public User User { get; set; }
-    [Required]
     public string Observation { get; set; }
     public DateTime ReservationDate { get; set; }
-    [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }
