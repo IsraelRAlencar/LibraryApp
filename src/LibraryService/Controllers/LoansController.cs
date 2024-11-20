@@ -59,7 +59,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<LoanDto>> UpdateLoan(Guid id, UpdateLoanDto updateLoanDto)
         {
-            var loan = await _repo.GetLoanByIdAsync(id);
+            var loan = await _repo.GetLoanEntityByIdAsync(id);
 
             if (loan == null) return NotFound();
 

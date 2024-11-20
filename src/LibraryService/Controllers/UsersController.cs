@@ -59,7 +59,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDto>> UpdateUser(Guid id, UpdateUserDto updateUserDto)
         {
-            var user = await _repo.GetUserByIdAsync(id);
+            var user = await _repo.GetUserEntityByIdAsync(id);
 
             if (user == null) return NotFound();
 

@@ -59,7 +59,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ImageDto>> UpdateImage(Guid id, UpdateImageDto updateImageDto)
         {
-            var image = await _repo.GetImageByIdAsync(id);
+            var image = await _repo.GetImageEntityByIdAsync(id);
 
             if (image == null) return NotFound();
 
