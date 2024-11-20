@@ -59,7 +59,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ReservationDto>> UpdateReservation(Guid id, UpdateReservationDto updateReservationDto)
         {
-            var reservation = await _repo.GetReservationByIdAsync(id);
+            var reservation = await _repo.GetReservationEntityByIdAsync(id);
 
             if (reservation == null) return NotFound();
 

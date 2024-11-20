@@ -59,7 +59,7 @@ namespace LibraryService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<CategoryDto>> UpdateCategory(Guid id, UpdateCategoryDto updateCategoryDto)
         {
-            var category = await _repo.GetCategoryByIdAsync(id);
+            var category = await _repo.GetCategoryEntityByIdAsync(id);
 
             if (category == null) return NotFound();
 
