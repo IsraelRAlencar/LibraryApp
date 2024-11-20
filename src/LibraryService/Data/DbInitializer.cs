@@ -104,7 +104,7 @@ public class DbInitializer
             new User { 
                 Id = Guid.NewGuid(),
                 Name = "Israel",
-                BirthDate = new DateTime(2002, 9, 23),
+                BirthDate = new DateTime(2002, 9, 23).ToUniversalTime(),
                 Email = "israel@email.com",
                 Password = "israel123",
                 CreatedAt = DateTime.UtcNow,
@@ -112,12 +112,14 @@ public class DbInitializer
             new User { 
                 Id = Guid.NewGuid(),
                 Name = "Nicole",
-                BirthDate = new DateTime(2004, 10, 31),
+                BirthDate = new DateTime(2004, 10, 31).ToUniversalTime(),
                 Email = "nicole@email.com",
                 Password = "nicole123",
                 CreatedAt = DateTime.UtcNow,
             }
         };
+
+        context.Users.AddRange(users);
 
         context.SaveChanges();
     }
