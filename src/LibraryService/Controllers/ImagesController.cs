@@ -42,6 +42,13 @@ namespace LibraryService.Controllers
         public async Task<ActionResult<ImageDto>> CreateImage(CreateImageDto createImageDto)
         {
             var image = _mapper.Map<Image>(createImageDto);
+
+            if (image.Book.Id != Guid.Empty)
+            {
+                var book = await _repo.GetBookEntityByIdAsync(image.Book.Id);
+                if (book != null) image.Book = book;
+                else return BadRequest("Book not found");
+            }
             
             _repo.AddImage(image);
 

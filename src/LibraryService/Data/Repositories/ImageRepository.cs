@@ -23,6 +23,11 @@ public class ImageRepository : IImageRepository
         _context.Images.Add(Image);
     }
 
+    public async Task<Book> GetBookEntityByIdAsync(Guid id)
+    {
+        return await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+    }
+
     public async Task<ImageDto> GetImageByIdAsync(Guid id)
     {
         return await _context.Images.ProjectTo<ImageDto>(_mapper.ConfigurationProvider)
