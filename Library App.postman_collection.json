@@ -1,0 +1,1204 @@
+{
+	"info": {
+		"_postman_id": "5c6d239e-33fd-46ea-a695-eae62710e1d8",
+		"name": "Library App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21958248"
+	},
+	"item": [
+		{
+			"name": "Library",
+			"item": [
+				{
+					"name": "Books",
+					"item": [
+						{
+							"name": "Get All Books",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstBookId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/books",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Book By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/books/{{FirstBookId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"books",
+										"{{FirstBookId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Book",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedBookId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"1984\",\r\n  \"author\": \"George Orwell\",\r\n  \"categories\": [\r\n    {\r\n      \"name\": \"Dystopian Fiction\"\r\n    }\r\n  ],\r\n  \"year\": 1949,\r\n  \"images\": [\r\n    {\r\n      \"imageUrl\": \"https://example.com/1984-cover.jpg\"\r\n    }\r\n  ],\r\n  \"publisher\": \"Secker & Warburg\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/books",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Book",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"1984 Hard Case Version\",\r\n  \"author\": \"George Orwell\",\r\n  \"pages\": 400\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/books/{{CreatedBookId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"books",
+										"{{CreatedBookId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Book",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/books/{{CreatedBookId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"books",
+										"{{CreatedBookId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "Get All Categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstCategoryId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/categories",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Category By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/categories/{{FirstCategoryId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"categories",
+										"{{FirstCategoryId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedCategoryId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction\",\r\n    \"description\": \"Books that explore imaginary worlds and characters\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/categories",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/categories/{{CreatedCategoryId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"categories",
+										"{{CreatedCategoryId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Loan",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/categories/{{CreatedCategoryId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"categories",
+										"{{CreatedCategoryId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Images",
+					"item": [
+						{
+							"name": "Get All Images",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstImageId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/images",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"images"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Image By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/images/{{FirstImageId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"images",
+										"{{FirstImageId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Image",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedImageId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"book\": {\r\n        \"id\": \"{{FirstBookId}}\"\r\n    },\r\n    \"imageUrl\": \"https://example.com/1984-cover.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/images",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"images"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Image",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imageUrl\": \"https://example.com/1985-cover.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/images/{{CreatedImageId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"images",
+										"{{CreatedImageId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Image",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/images/{{CreatedImageId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"images",
+										"{{CreatedImageId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get All Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstUserId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/users",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/users/{{FirstUserId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"users",
+										"{{FirstUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedUserId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"beltrano\",\r\n  \"birthDate\": \"2004-12-28T00:00:00Z\",\r\n  \"email\": \"beltrano@email.com\",\r\n  \"password\": \"beltrano123\",\r\n  \"createdAt\": \"2024-11-19T12:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/users",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"beltrano1@email.com\",\r\n  \"password\": \"beltrano1234\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/users/{{CreatedUserId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"users",
+										"{{CreatedUserId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/users/{{CreatedUserId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"users",
+										"{{CreatedUserId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Loans",
+					"item": [
+						{
+							"name": "Get All Loans",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstLoanId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/loans",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"loans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Loan By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/loans/{{FirstLoanId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"loans",
+										"{{FirstLoanId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Loan",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedLoanId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"book\": {\r\n        \"title\": \"C# Programming\",\r\n        \"author\": \"John Doe\",\r\n        \"isbn\": \"123-4567891234\"\r\n    },\r\n    \"user\": {\r\n        \"id\": \"{{FirstUserId}}\"\r\n    },\r\n    \"observation\": \"Return in good condition\",\r\n    \"loanDate\": \"2024-11-25T10:30:00Z\",\r\n    \"returnDate\": \"2024-12-02T10:30:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/loans",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"loans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Loan",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"observation\": \"Return in not so good condition\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/loans/{{CreatedLoanId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"loans",
+										"{{CreatedLoanId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Loan",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/loans/{{CreatedLoanId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"loans",
+										"{{CreatedLoanId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reservations",
+					"item": [
+						{
+							"name": "Get All Reservations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test('Status code is 200', function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"pm.collectionVariables.set(\"FirstReservationId\", jsonData[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/reservations",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Reservation By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/reservations/{{FirstReservationId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"reservations",
+										"{{FirstReservationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Reservation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"CreatedReservationId\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"book\": {\r\n        \"id\": \"{{FirstBookId}}\"\r\n    },\r\n    \"user\": {\r\n        \"name\": \"Alice Johnson\",\r\n        \"email\": \"alice.johnson@example.com\",\r\n        \"password\": \"alice123\",\r\n        \"phone\": \"555-6789\"\r\n    },\r\n    \"observation\": \"Reservation made for academic purposes\",\r\n    \"reservationDate\": \"2024-11-26T10:00:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/reservations",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Reservations",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"observation\": \"Reservation made for academic purposes due to end of semester\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/reservations/{{CreatedReservationId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"reservations",
+										"{{CreatedReservationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Loan",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Fiction II\",\r\n    \"description\": \"Books that explore even more bizare and imaginary worlds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LibraryServiceApi}}/library/reservations/{{CreatedReservationId}}",
+									"host": [
+										"{{LibraryServiceApi}}"
+									],
+									"path": [
+										"library",
+										"reservations",
+										"{{CreatedReservationId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"// const fetchAndStore = async (url, variableName) => {\r",
+							"//     const response = await pm.sendRequest({\r",
+							"//         url: url,\r",
+							"//         method: 'GET'\r",
+							"//     });\r",
+							"\r",
+							"//     // Armazena o resultado em uma variável de ambiente\r",
+							"//     pm.environment.set(variableName, JSON.stringify(response.json()[0].id));\r",
+							"// };\r",
+							"\r",
+							"// const endpoints = [\r",
+							"//     { url: 'http://localhost:5000/library/books', variable: 'FirstBookId' },\r",
+							"//     { url: 'http://localhost:5000/library/categories', variable: 'FirstCategoryId' },\r",
+							"//     { url: 'http://localhost:5000/library/images', variable: 'FirstImageId' },\r",
+							"//     { url: 'http://localhost:5000/library/users', variable: 'FirstUserId' }\r",
+							"//     // { url: 'http://localhost:5000/library/loans', variable: 'FirstLoanId' },\r",
+							"//     // { url: 'http://localhost:5000/library/reservations', variable: 'FirstReservationId' },\r",
+							"// ];\r",
+							"\r",
+							"// endpoints.forEach(async (endpoint) => {\r",
+							"//     await fetchAndStore(endpoint.url, endpoint.variable);\r",
+							"// });"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SearchServiceApi}}/api/search",
+							"host": [
+								"{{SearchServiceApi}}"
+							],
+							"path": [
+								"api",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Books Mockingbird",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SearchServiceApi}}/api/search?searchTerm=To%20Kill%20a%20Mockingbird&OrderBy=title&PageNumber=1&PageSize=10",
+							"host": [
+								"{{SearchServiceApi}}"
+							],
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "To%20Kill%20a%20Mockingbird"
+								},
+								{
+									"key": "OrderBy",
+									"value": "title"
+								},
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Books Pride and Prejudice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SearchServiceApi}}/api/search?searchTerm=Pride%20and%20Prejudice&OrderBy=title&PageNumber=1&PageSize=10",
+							"host": [
+								"{{SearchServiceApi}}"
+							],
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "Pride%20and%20Prejudice"
+								},
+								{
+									"key": "OrderBy",
+									"value": "title"
+								},
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LibraryServiceApi",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "SearchServiceApi",
+			"value": "http://localhost:5001",
+			"type": "string"
+		},
+		{
+			"key": "FirstBookId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedBookId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FirstCategoryId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedCategoryId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FirstLoanId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedLoanId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FirstReservationId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedReservationId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FirstImageId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedImageId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FirstUserId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CreatedUserId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
