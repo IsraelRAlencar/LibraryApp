@@ -55,12 +55,17 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Loans, opt => opt.MapFrom(src => src.Loans))
             .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations));
         CreateMap<CreateUserDto, User>();
+        CreateMap<UserDto, User>()
+            .ForMember(dest => dest.Loans, opt => opt.MapFrom(src => src.Loans))
+            .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations));
 
         // Loan Mappings
         CreateMap<Loan, LoanDto>()
             .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
             .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
-        CreateMap<CreateLoanDto, Loan>();
+        CreateMap<CreateLoanDto, Loan>()
+            .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
+            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
 
         // Image mappings
         CreateMap<Image, ImageDto>()

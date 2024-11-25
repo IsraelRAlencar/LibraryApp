@@ -42,6 +42,20 @@ namespace LibraryService.Controllers
         public async Task<ActionResult<LoanDto>> CreateLoan(CreateLoanDto createLoanDto)
         {
             var loan = _mapper.Map<Loan>(createLoanDto);
+
+            if (loan.Book.Id != Guid.Empty)
+            {
+                var book = await _repo.GetBookEntityByIdAsync(loan.Book.Id);
+                if (book != null) loan.Book = book;
+                else return BadRequest("Book not found");
+            }
+
+            if (loan.User.Id != Guid.Empty)
+            {
+                var user = await _repo.GetUserEntityByIdAsync(loan.User.Id);
+                if (user != null) loan.User = user;
+                else return BadRequest("User not found");
+            }
             
             _repo.AddLoan(loan);
 

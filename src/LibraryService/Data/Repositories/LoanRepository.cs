@@ -23,6 +23,11 @@ public class LoanRepository : ILoanRepository
         _context.Loans.Add(Loan);
     }
 
+    public Task<Book> GetBookEntityByIdAsync(Guid id)
+    {
+        return _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+    }
+
     public async Task<LoanDto> GetLoanByIdAsync(Guid id)
     {
         return await _context.Loans.ProjectTo<LoanDto>(_mapper.ConfigurationProvider)
@@ -37,6 +42,11 @@ public class LoanRepository : ILoanRepository
     public async Task<List<LoanDto>> GetLoansAsync()
     {
         return await _context.Loans.ProjectTo<LoanDto>(_mapper.ConfigurationProvider).ToListAsync();
+    }
+
+    public async Task<User> GetUserEntityByIdAsync(Guid id)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public void RemoveLoan(Loan Loan)
