@@ -121,6 +121,60 @@ public class DbInitializer
 
         context.Users.AddRange(users);
 
+        List<Loan> loans = new List<Loan>
+        {
+            new Loan
+            {
+                Id = Guid.NewGuid(),
+                Book = books[0],
+                User = users[0],
+                Observation = "Returned in good condition.",
+                LoanDate = DateTime.UtcNow.AddDays(-15),
+                ReturnDate = DateTime.UtcNow.AddDays(-5),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Loan
+            {
+                Id = Guid.NewGuid(),
+                Book = books[1],
+                User = users[1],
+                Observation = "Overdue by 2 days.",
+                LoanDate = DateTime.UtcNow.AddDays(-30),
+                ReturnDate = DateTime.UtcNow.AddDays(-10),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            }
+        };
+
+        context.Loans.AddRange(loans);
+
+        List<Reservation> reservations = new List<Reservation>
+        {
+            new Reservation
+            {
+                Id = Guid.NewGuid(),
+                Book = books[2],
+                User = users[0],
+                Observation = "Waiting for pickup at the library.",
+                ReservationDate = DateTime.UtcNow.AddDays(-2),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Reservation
+            {
+                Id = Guid.NewGuid(),
+                Book = books[0],
+                User = users[1],
+                Observation = "Reserved for delivery to home address.",
+                ReservationDate = DateTime.UtcNow.AddDays(-7),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            }
+        };
+
+        context.Reservations.AddRange(reservations);
+
         context.SaveChanges();
     }
 }
