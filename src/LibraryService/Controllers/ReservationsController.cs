@@ -42,6 +42,20 @@ namespace LibraryService.Controllers
         public async Task<ActionResult<ReservationDto>> CreateReservation(CreateReservationDto createReservationDto)
         {
             var reservation = _mapper.Map<Reservation>(createReservationDto);
+
+            if (reservation.Book.Id != Guid.Empty)
+            {
+                var book = await _repo.GetBookEntityByIdAsync(reservation.Book.Id);
+                if (book != null) reservation.Book = book;
+                else return BadRequest("Book not found");
+            }
+
+            if (reservation.User.Id != Guid.Empty)
+            {
+                var user = await _repo.GetUserEntityByIdAsync(reservation.User.Id);
+                if (user != null) reservation.User = user;
+                else return BadRequest("User not found");
+            }
             
             _repo.AddReservation(reservation);
 

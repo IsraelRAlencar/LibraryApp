@@ -23,6 +23,11 @@ public class ReservationRepository : IReservationRepository
         _context.Reservations.Add(Reservation);
     }
 
+    public Task<Book> GetBookEntityByIdAsync(Guid id)
+    {
+        return _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+    }
+
     public async Task<ReservationDto> GetReservationByIdAsync(Guid id)
     {
         return await _context.Reservations.ProjectTo<ReservationDto>(_mapper.ConfigurationProvider)
@@ -37,6 +42,11 @@ public class ReservationRepository : IReservationRepository
     public async Task<List<ReservationDto>> GetReservationsAsync()
     {
         return await _context.Reservations.ProjectTo<ReservationDto>(_mapper.ConfigurationProvider).ToListAsync();
+    }
+
+    public async Task<User> GetUserEntityByIdAsync(Guid id)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public void RemoveReservation(Reservation Reservation)
