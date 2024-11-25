@@ -103,18 +103,18 @@ public class DbInitializer
         {
             new User { 
                 Id = Guid.NewGuid(),
-                Name = "Israel",
+                Name = "Fulano",
                 BirthDate = new DateTime(2002, 9, 23).ToUniversalTime(),
-                Email = "israel@email.com",
-                Password = "israel123",
+                Email = "fulano@email.com",
+                Password = "fulano123",
                 CreatedAt = DateTime.UtcNow,
             },
             new User { 
                 Id = Guid.NewGuid(),
-                Name = "Nicole",
+                Name = "Ciclano",
                 BirthDate = new DateTime(2004, 10, 31).ToUniversalTime(),
-                Email = "nicole@email.com",
-                Password = "nicole123",
+                Email = "ciclano@email.com",
+                Password = "ciclano123",
                 CreatedAt = DateTime.UtcNow,
             }
         };
